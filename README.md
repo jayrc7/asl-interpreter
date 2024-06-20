@@ -2,4 +2,4 @@
 
 2 phases
 - define an ml model that can interpret sign language
-- send translations in real time to a web/mobile application
+- send video stream in real time to a server so that the model can then translate the video 
