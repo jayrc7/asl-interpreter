@@ -1,11 +1,46 @@
 <script setup>
     import { RouterLink } from 'vue-router';
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
+    import _ from 'lodash';
 
     let clients = ref([
         { name: "Jason", birthday: "January 15, 1999"},
         { name: "Jenny", birthday: "January 04, 1999"}
     ]);
+
+    // reference to the video element
+    let video = ref(null)
+    let camera = ref(null)
+
+    // contains the list of media devices the user has
+    let devices = ref([])
+
+    // check if user's browser supports media devices
+    if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+      // get access to the user's input devices 
+      camera = await navigator.mediaDevices.getUserMedia({video:  {
+        width: 1280, 
+        height: 720,
+        facingMode: 'user',
+        deviceId: {
+          exact: "cc569b83ae79fdd24f8ea5428a9464d771d65a010029c751357d56cf986af238"
+        }
+      }})
+
+      // only request audio inputs
+      // devices = await navigator.mediaDevices.enumerateDevices();
+      // devices = _.filter(devices, function(o) {
+      //   return o.kind == 'videoinput';
+      // })
+
+
+    } else {
+      window.alert("Unable to access device camera")
+    }
+
+    onMounted(() => {
+      video.value.srcObject = camera;
+    })
 
 </script>
 
@@ -20,4 +55,12 @@
     <p>{{ client.birthday }}</p>
   </li>
 
+  <video ref="video" autoplay></video>
 </template>
+
+<style>
+  video {
+    width: 20%;
+    height: 20%;
+  }
+</style>
