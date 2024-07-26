@@ -49,13 +49,23 @@
     <RouterLink to="/about">About</RouterLink>
   </nav>
 
-  <h1> ASL Interpreter Transcipt </h1>
-  <li v-for="client of clients">
-    <p>{{ client.name }}</p>
-    <p>{{ client.birthday }}</p>
-  </li>
+  <div class="columns-2xl">
+    <div style="background-color: blue;" class="w-full">
+      <div style="background-color: blue" class="md:w-3 lg:w-8">
+        <h1> hi there </h1>
+      </div>
 
-  <video ref="video" autoplay></video>
+      <h1> ASL Interpreter Transcipt </h1>
+      <li v-for="client of clients">
+        <p>{{ client.name }}</p>
+        <p>{{ client.birthday }}</p>
+      </li>
+    </div>
+
+    <div style="width: 220vw; height: 170vw" class="w-full">
+      <video  ref="video" autoplay></video>
+    </div>
+  </div>
 </template>
 
 <style>
